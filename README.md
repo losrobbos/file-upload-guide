@@ -8,23 +8,27 @@ We will use the example of an Avatar upload.
 
 ## Steps 
 
-	* Signup to Cloudinary
+	* Signup to Cloudinary: https://cloudinary.com/users/register/free
   * Free Plan & Pricing: https://cloudinary.com/pricing
 
 ### Backend part
 
   * Install following packages: `npm i multer datauri cloudinary dotenv` 
 	* Configure Cloudinary URL in a .env of your backend
+
   * Load the .env in your server.js file (if not done already)
     * `require("dotenv").config() `
+
 	* Setup an upload middleware with Multer and export it
     ```
       const multer = require("multer")
       const upload = multer({ storage: multer.memoryStorage() })
       module.exports = upload
     ```
+
 	* Adapt your model where you wanna attach an image URL
     * Example User Model: add a field "avatar_url" (String)
+
 	* Attach middleware to a route which should receives uploads
     * e.g. in users route `router.post('/', upload.single('avatar'), (req, res, next) => {}`
     * It is important to tell multer the exact FIELD NAME you used in the form (!) in upload.single("FIELD_NAME")
