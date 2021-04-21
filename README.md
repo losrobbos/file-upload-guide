@@ -8,8 +8,8 @@ We will use the example of an Avatar upload.
 
 ## Steps 
 
-	* Signup to Cloudinary: https://cloudinary.com/users/register/free
-  * Free Plan & Pricing: https://cloudinary.com/pricing
+* Signup to Cloudinary: https://cloudinary.com/users/register/free
+* Free Plan & Pricing: https://cloudinary.com/pricing
 
 ### Backend part
 
@@ -41,40 +41,40 @@ We will use the example of an Avatar upload.
 
 ### Frontend part
 
-	* Create or use an existing React Frontend to upload a file
-    * Ideally some app with a signup or any other upload form
+* Create or use an existing React Frontend to upload a file
+  * Ideally some app with a signup or any other upload form
 
-  * Notes on usage with React-Hook-Form
-    * Once you register an input by putting the "register" key on it, you cannot put an additional "onChange" handler on it anymore
-    * But in order to listen for the Avatar File Selection (and show a preview) we need to listen for this
-    * The simplest way is to simply not handle the file input by React-Hook-Form
-      * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> ` 
+* Notes on usage with React-Hook-Form
+  * Once you register an input by putting the "register" key on it, you cannot put an additional "onChange" handler on it anymore
+  * But in order to listen for the Avatar File Selection (and show a preview) we need to listen for this
+  * The simplest way is to simply not handle the file input by React-Hook-Form
+    * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> ` 
 
-  * Submitting mixed data
-    * When we want to submit mixed data (so called "multipart form data") we need to send the data to the API differently
-    * In Axios we need to prevent the default Content-Type "application/json"
-      * ` axios.post('/myApiUploadUrl, data, { headers: { 'Content-Type': 'undefined' } })`
-      * Now we are ready to send mixed data to the backend
+* Submitting mixed data
+  * When we want to submit mixed data (so called "multipart form data") we need to send the data to the API differently
+  * In Axios we need to prevent the default Content-Type "application/json"
+    * ` axios.post('/myApiUploadUrl, data, { headers: { 'Content-Type': 'undefined' } })`
+    * Now we are ready to send mixed data to the backend
 
-  * Submitting
-    * If we wanna send mixed data, we cannot simply pass in JSON data anymore to Axios
-    * We need to pass in a FormData object
-    * Example:
-      ```
-        onSubmit = (data) => {
-          const formData = new FormData()
+* Submitting
+  * If we wanna send mixed data, we cannot simply pass in JSON data anymore to Axios
+  * We need to pass in a FormData object
+  * Example:
+    ```
+      onSubmit = (data) => {
+        const formData = new FormData()
 
-          // attach avatar (stored in state)
-          formData.append('avatar', avatarFile)
+        // attach avatar (stored in state)
+        formData.append('avatar', avatarFile)
 
-          // loop through form data and append
-          for(let key in data) {
-            formData.append(key, data[key])
-          }
-
-          axios.post('/myApiUploadUrl', formData, { headers: { 'Content-Type': 'undefined' }})
+        // loop through form data and append
+        for(let key in data) {
+          formData.append(key, data[key])
         }
-      ```
+
+        axios.post('/myApiUploadUrl', formData, { headers: { 'Content-Type': 'undefined' }})
+      }
+    ```
 
 ### BONUS: Deploy backend & frontend
 
