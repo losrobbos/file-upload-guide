@@ -33,6 +33,16 @@ We will use the example of an Avatar upload.
   * It is important to tell multer the exact FIELD NAME you used in the form (!) in upload.single("FIELD_NAME")
   * e.g. Form input was defined like this `<input type="file" name="myImage" />`
   * Multer parsing: `upload.single("myImage"")`
+  * Multer will make the parsed file in a special object `req.file`
+
+* Perform upload
+  * Convert the received binary data (stored in req.file) into a DataURI (base64 encoded file string):
+    * https://www.npmjs.com/package/datauri#from-a-buffer
+  * Upload the string to cloudinary
+    `const result = await cloudinary.upload.upload(dataUriString)`
+  * Store the received URL in your model
+    * e.g. ` const userNew = await User({ ...req.body, avatar_url: result.secure_url })
+  * Return the created user to the frontend using res.json()
 
 * Test File upload against your route from Insomnia
   * Select as BODY type "multipart / form data"
