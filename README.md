@@ -74,10 +74,10 @@ We will use the example of an Avatar upload.
       onSubmit = (data) => {
         const formData = new FormData()
 
-        // attach avatar (stored in state)
+        // attach avatar binary file (stored in state)
         formData.append('avatar', avatarFile)
 
-        // loop through form data and append
+        // loop through JSON data and append
         for(let key in data) {
           formData.append(key, data[key])
         }
