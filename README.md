@@ -15,6 +15,8 @@ We will use the example of an Avatar upload.
 
 * Install following packages: `npm i multer datauri cloudinary dotenv` 
 * Configure Cloudinary URL in a .env of your backend
+  * The Cloudinary URL is similar to your MongoDB Atlas URL. A url to your own cloud including your user credentials
+  * You find the Cloudinary Environment URL in the cloudinary dashboard after login
 
 * Load the .env in your server.js file (if not done already):  `require("dotenv").config() `
 
