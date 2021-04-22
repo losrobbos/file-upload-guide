@@ -1,6 +1,6 @@
 # File Uploading & Display - Fullstack
 
-Find here summarized a mini guide how to incorporate file uplading with a (free) file cloud provider.
+Find here summarized a mini guide how to incorporate file uplading from frontend to backend with a (free) file cloud provider.
 
 We will use Cloudinary as the provider, which allows us (at the time of writing) 10GB+ storage for free.
 
