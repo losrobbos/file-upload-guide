@@ -67,12 +67,17 @@ We will use the example of an Avatar upload.
   * Define an onAvatarChange handler `const onAvatarChange = (e) => {...}`
   * The file, the user selected, will be availble in the event object: `e.target.files[0]`
   * If you allowed multiple file selection (with `<input type="file" multiple />`) you will have an array of files in `e.target.files`
-  * Store the avatar file in state `setAvatarFile( e.target.files[0] ) `
+  * Store the avatar file in state `setAvatarFile( e.target.files[0] )`
 
 * Previewing an image
   * In case you wanna have a preview of the selected file, you can generate a "BLOB" Url (BLOB = Binary Large Object)
-  * Use the builtin browser method `URL.createObjectUrl()` for this: `const avatarPreview = URL.createObjectURL( e.target.files[0] )`
-  * This "temporary URL" you can store in state and assign to an image tag `<img src="<yourBlogUrl> />`
+  * Setup a state for storing this avatar preview url: `const [avatarPreview, setAvatarPreview] =  useState( )`
+  * Use the builtin browser method `URL.createObjectUrl()` and store it in state: 
+   ```
+   const fileUrl = URL.createObjectURL( e.target.files[0] )
+   setAvatarPreview( fileUrl )   
+   ```
+   * ... and assign it to an image tag `<img src="<yourBlogUrl> />`
   * Et voila: Now you have an avatar preview on file selection
   * To select a file on image click, you can use the label trick 
     * Put an id on the HTML file input (e.g. type="file" id="avatar") 
