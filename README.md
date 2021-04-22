@@ -54,11 +54,31 @@ We will use the example of an Avatar upload.
 * Create or use an existing React Frontend to upload a file
   * Ideally some app with a signup or any other upload form
 
+* Create an input of type "file", e.g.
+  * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> `*    
+  * This will make it possible to select files from your filesystem
+
+* Handle the avatar selection
+  * Setup a state for storing the avatar file: `const [avatarFile, setAvatarFile] =  useState()`
+  * Define an onAvatarChange handler `const onAvatarChange = (e) => {...}`
+  * The file, the user selected, will be availble in the event object: `e.target.files[0]`
+  * If you allowed multiple file selection (with `<input type="file" multiple />`) you will have an array of files in `e.target.files`
+  * Store the avatar file in state `setAvatarFile( e.target.files[0] ) `
+
+* Previewing an image
+  * In case you wanna have a preview of the selected file, you can generate a "BLOB" Url (BLOG = Binary Large Object)
+  * Use the built-in browser method URL.createObjectUrl() for this: `const avatarPreview = URL.createObjectURL( e.target.files[0] )
+  * This "temporary URL" you can store in state and assign to an image tag``<img src="<yourBlogUrl> />"
+  * Et voila: Now you have an avatar preview on file selection
+  * To select a file on image click, you can use the label trick 
+    * Put an id on the HTML file input (e.g. id="avatar") 
+    * Wrap your preview image with a label and link it to the input (htmlFor="avatar")
+    * Now you can hide the ugly default file input field, e.g. with simple CSS (visibility: hidden)
+
 * Notes on usage with React-Hook-Form
   * Once you register an input by putting the "register" key on it, you cannot put an additional "onChange" handler on it anymore
   * But in order to listen for the Avatar File Selection (and show a preview) we need to listen for this
-  * The simplest way is to simply not handle the file input by React-Hook-Form
-    * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> ` 
+  * The simplest way is to simply not handle the file input by React-Hook-Form, so by N 
 
 * Submitting mixed data
   * When we want to submit mixed data (so called "multipart form data") we need to send the data to the API differently
