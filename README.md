@@ -70,7 +70,7 @@ We will use the example of an Avatar upload.
   * Store the avatar file in state `setAvatarFile( e.target.files[0] ) `
 
 * Previewing an image
-  * In case you wanna have a preview of the selected file, you can generate a "BLOB" Url (BLOG = Binary Large Object)
+  * In case you wanna have a preview of the selected file, you can generate a "BLOB" Url (BLOB = Binary Large Object)
   * Use the built-in browser method URL.createObjectUrl() for this: `const avatarPreview = URL.createObjectURL( e.target.files[0] )
   * This "temporary URL" you can store in state and assign to an image tag``<img src="<yourBlogUrl> />"
   * Et voila: Now you have an avatar preview on file selection
