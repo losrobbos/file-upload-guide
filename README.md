@@ -59,7 +59,7 @@ We will use the example of an Avatar upload.
   * Ideally some app with a signup or any other upload form
 
 * Create an input of type "file", e.g.
-  * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> `*    
+  * `<input name="avatar" type='file' accept='image/*' onChange={onAvatarChange} /> `
   * This will make it possible to select files from your filesystem
 
 * Handle the avatar selection
