@@ -126,7 +126,7 @@ For the family photos we set an input field for selecting multiple files.
 
 ##### Backend
 
-To tell Multer to scan for files in several received file inputs, we can use the upload.fields() method.
+To tell Multer to scan for files in several received file inputs, we can use the `upload.fields()` method, which expects an array of form field names.
 
 ```
 ` router.post("/recipe", upload.fields([{name: "avatar"}, { name: "family", maxCount: 3 }]), ...yourController...) `
