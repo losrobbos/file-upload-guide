@@ -30,12 +30,12 @@ We will use the example of an Avatar upload.
 * Adapt your model where you wanna attach an image URL
   * Example User Model: add a field "avatar_url" (String)
 
-* Attach middleware to a route which should receives uploads
+* Attach middleware to a route which should receive uploads
   * e.g. in users route `router.post('/', upload.single('avatar'), (req, res, next) => {}`
   * It is important to tell multer the exact FIELD NAME you used in the form (!) in upload.single("FIELD_NAME")
   * e.g. Form input was defined like this `<input type="file" name="myImage" />`
   * Multer parsing: `upload.single("myImage"")`
-  * Multer will make the parsed file in a special object `req.file`
+  * Multer will put the parsed file data into a special object `req.file`
 
 * Perform upload
   * Convert the received binary data (stored in req.file) into a DataURI (base64 encoded file string):
