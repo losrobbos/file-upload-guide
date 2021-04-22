@@ -43,7 +43,7 @@ We will use the example of an Avatar upload.
   * Upload the string to cloudinary
     * `const result = await cloudinary.upload.upload( dataUriParseResult.content )`
   * Store the received URL in your model
-    * e.g. ` const userNew = await User({ ...req.body, avatar_url: result.secure_url })
+    * e.g. `const userNew = await User({ ...req.body, avatar_url: result.secure_url }) `
   * Return the created user to the frontend using res.json()
 
 * Test File upload against your route from Insomnia
