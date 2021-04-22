@@ -63,7 +63,8 @@ We will use the example of an Avatar upload.
 * Submitting mixed data
   * When we want to submit mixed data (so called "multipart form data") we need to send the data to the API differently
   * In Axios we need to prevent the default Content-Type "application/json"
-    * ` axios.post('/myApiUploadUrl, data, { headers: { 'Content-Type': 'undefined' } })`
+    * `axios.post('/myApiUploadUrl, data, { headers: { 'Content-Type': 'undefined' } })`
+    * The browser will automatically convert this Content-Type into "multipart/form-data" + necessary configuration in order to make the mixed upload work
     * Now we are ready to send mixed data to the backend
 
 * Submitting
@@ -86,13 +87,68 @@ We will use the example of an Avatar upload.
       }
     ```
 
-### BONUS: Deploy backend & frontend
+### Uploading multiple files
 
-  * Deploy the backend (do not forget to outsource all sensitive stuff to .env)
-  * Set each prod env variables on heroku using `heroku config:set KEY=VALUE`
-  * Test your deployed backend with your frontend running on localhost first
-  * Once working: Deploy your frontend to vercel
-  * Put the generated Frontend URL / Domain into FRONTEND_ORIGIN with heroku config:set
+Let's assume in a form you wanna upload images for a recipe of your favorite food.
+
+#### Frontend
+
+Simply add the "multiple" HTML attribute to your input field 
+
+` <input type="file" name="recipe_images" accept="image/*" multiple />`
+
+#### Backend
+
+Now instead of using "upload.single" we need to use the "upload.array" method of Multer:
+
+` router.post("/recipe", upload.array("recipe_images"), ...yourController...) `
+
+Important: Instead of req.file the contents will now get stored in the variable `req.files`. This will be an array of file objects.
+
+Each object in the array req.files has all the file properties, including "originalname" (for the uploaded filename) + the field "buffer" with the binary image data.
+
+
+### Uploading two different file fields
+
+Let's assume you wanna manage your user avatar + your family photos in your profile.
+
+Now we will have two DIFFERENT file input fields we wanna upload. How do we do this?
+
+##### Frontend Form
+
+For the avatar we can set an input to select a single file.
+For the family photos we set an input field for selecting multiple files.
+
+```
+<input type="file" name="avatar" accept="image/*" />
+<input type="file" name="family" accept="image/*" multiple />
+```
+
+##### Backend
+
+To tell Multer to scan for files in several received file inputs, we can use the upload.fields() method.
+
+```
+` router.post("/recipe", upload.fields([{name: "avatar"}, { name: "family", maxCount: 3 }]), ...yourController...) `
+
+```
+Again, all your files will now be available in `req.files`.
+
+How to now distinguish the avatar image from the family images in the req.files array?
+
+Well, each file object in the array has the field "fieldname".
+
+E.g.: 
+```
+{ 
+  originalname: 'my_avatar.png',
+  buffer: <...SomeLenghtyBinaryThing...>
+  fieldname: "avatar"
+}
+
+```
+
+So by checking the fieldname, you will know which type of image was uploaded.
 
 
 ## Resources
