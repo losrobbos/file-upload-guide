@@ -96,15 +96,15 @@ Also in the backend we do not need to parse binary data this way anymore, we can
   * The simplest way is to simply not handle the file input by React-Hook-Form
 
 * Submitting
-  * If we wanna send mixed data, we cannot simply pass in JSON data anymore to Axios
-  * We need to pass in a FormData object
-  * Example:
+  * Before sending the data to Axios, we need to merge the encoded avatar file into the form JSON data
+  * Afterwards we can forward all data with Axios to the API
+  * Full submit Example:
     ```
       onSubmit = (jsonData) => {
       
         jsonData.avatar = avatarPreview // merge the avatar string into our data
 
-        // signup user in backend
+        // signup user with avatar in backend
         try {
           let response = await axios.post('http://localhost:5000/users', jsonData)
           console.log("Response: ", response.data) // => signed up user
