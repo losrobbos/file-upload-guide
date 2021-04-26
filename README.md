@@ -40,10 +40,9 @@ Also in the backend we do not need to parse binary data this way anymore, we can
   * Return the created user to the frontend using res.json()
 
 * Test File upload against your route from Insomnia
-  * Use JSON as Body format
-  * Provide normal JSON data
+  * Setup a POST request to your upload URL & use JSON as Body format
   * Convert some avatar file to a base64 dataUri, e.g. here: https://www.base64-image.de/
-  * Paste the dataUri into your Body
+  * Paste the dataUri into your JSON Body
   * Example body:
   ```
   {
