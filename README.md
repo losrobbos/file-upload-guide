@@ -6,11 +6,11 @@ We will use Cloudinary as the provider, which allows us (at the time of writing)
 
 We will use the example of an Avatar upload.
 
-In this fullstack sample we will encode our images as base64 strings BEFORE uploading them to the API.
+In this fullstack sample we will encode our images as base64 strings BEFORE uploading them to the API. So we will do the conversion in the frontend.
 
-This way we can do not need to send "multipart formdata" which simplifies the workflow in the frontend a lot.
+This way we do not need to send "multipart formdata" and just upload a JSON object as usual, which simplifies the workflow in the frontend a lot.
 
-Also in the backend we do not need to parse binary data this way anymore, we can simply forward the received base64 to our file cloud provider.
+Also in the backend we then do not need to parse binary data anymore. We can simply upload directly the received base64 string to our file cloud provider.
 
 ## Steps 
 
@@ -24,9 +24,9 @@ Also in the backend we do not need to parse binary data this way anymore, we can
   * The Cloudinary URL is similar to your MongoDB Atlas URL. A url to your own cloud including your user credentials
   * You find the Cloudinary Environment URL in the cloudinary dashboard after login
 
-* Load the .env in your server.js file (if not done already):  `require("dotenv").config() `
+* Load the .env at the top of your server.js file (if not done already):  `require("dotenv").config() `
 
-* Adapt your model where you wanna attach an image URL
+* Adapt your model where you wanna store an image URL
   * Example User Model: add a field "avatar_url" (String)
 
 * Upload route
@@ -40,7 +40,7 @@ Also in the backend we do not need to parse binary data this way anymore, we can
   * Return the created user to the frontend using res.json()
 
 * Test File upload against your route from Insomnia
-  * Setup a POST request to your upload URL & use JSON as Body format
+  * Setup a POST request to your API upload URL & use JSON as Body format
   * Convert some avatar file to a base64 dataUri, e.g. here: https://www.base64-image.de/
   * Paste the dataUri into your JSON Body
   * Example body:
@@ -65,15 +65,16 @@ Also in the backend we do not need to parse binary data this way anymore, we can
   * Define an onAvatarChange handler `const onAvatarChange = (e) => {...}`
   * The file, the user selected, will be availble in the event object: `e.target.files[0]`
   * If you allowed multiple file selection (with `<input type="file" multiple />`) you will have an array of files in `e.target.files`
-  * e.target.files contains the binary files. These we now need to convert to DataURI Strings using the builtin FileReader class
-  * ```
+  * e.target.files contains the binary files. These we now need to convert to DataURI Strings using the Browser builtin `FileReader` class
+  * Example: 
+    ```
     let fileSelected = e.target.files[0]  // grab selected file
 
     if(!fileSelected) return
 
     let fileReader = new FileReader()
     fileReader.readAsDataURL( fileSelected ) // concert to base64 encoded string
-    // wait until file is fully loaded / converted to base64
+    // wait until file is fully loaded / converted to base64 (once fully loaded the "onloadedend" event below fires)
     fileReader.onloadend = (ev) => {
       setAvatarPreview( fileReader.result )
     }
@@ -92,7 +93,7 @@ Also in the backend we do not need to parse binary data this way anymore, we can
 * Notes on usage with React-Hook-Form
   * Once you register an input by putting the "register" key on it, you cannot put an additional "onChange" handler on it anymore
   * But in order to listen for the Avatar File Selection (and show a preview) we need that onChange handler...
-  * The simplest way is to simply not handle the file input by React-Hook-Form
+  * So the simplest way to avoid this, is by not handling the file input by React-Hook-Form (not putting a register key on it)
 
 * Submitting
   * Before sending the data to Axios, we need to merge the encoded avatar file into the form JSON data
