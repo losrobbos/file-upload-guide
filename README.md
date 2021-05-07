@@ -29,7 +29,8 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 * Adapt your model where you wanna store an image URL
   * Example User Model: add a field "avatar_url" (String)
 
-* Upload route
+* Upload route handler (=controller)
+  * Import cloudinary at the top of your file: `const cloudinary = require("cloudinary").v2`   
   * Extract / split the avatar file and normal JSON data from req.body: `const { avatar, ...userData } = req.body `
   * Upload the avatar string to cloudinary
     * `const result = await cloudinary.upload.upload( avatar )`
