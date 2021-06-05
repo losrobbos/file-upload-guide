@@ -121,6 +121,27 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
       }
     ```
 
+### Uploading two different file fields
+
+Let's assume you wanna manage your user avatar + your family photo in your profile.
+
+Now we will have two DIFFERENT file input fields we wanna upload. How do we do this?
+
+##### Frontend Form
+
+For the avatar we can set an input to select a single file.
+For the family photo we set another input field.
+
+```
+<input type="file" name="avatar" accept="image/*" />
+<input type="file" name="family" accept="image/*" />
+```
+
+##### Backend
+
+Now you will have the base64 encoded image strings availabe in req.body as usual (req.body.avatar and req.body.family in this case).
+
+
 ### Uploading multiple files
 
 Let's assume in a form you wanna upload images for a recipe of your favorite food.
@@ -131,30 +152,23 @@ Simply add the "multiple" HTML attribute to your input field
 
 ` <input type="file" name="recipe_images" accept="image/*" multiple />`
 
+Now depending how you send the data, you need to prepare the data differently.
+
+Here we assume, you manage the files in an array in state, e.g. `const [recipeImages, setRecipeImages] = useState([])`
+
+If you put an onChange handler on your "multiple input" field, you will have now all files availabe in the event: `e.target.files`
+
+Now you need to loop over that list of files - using the FileReader class (see above) - and convert each file to a base64 string.
+
+Alternative: You do this conversion on submit of the whole form to make it a bit more efficient.
+
 #### Backend
 
-Will follow...
+You will now receive the list of file strings in an array in `req.body.recipe_images`. 
 
+Now you can loop over that array and upload each file to cloudinary, receiving an URL for each one. 
 
-### Uploading two different file fields
-
-Let's assume you wanna manage your user avatar + your family photos in your profile.
-
-Now we will have two DIFFERENT file input fields we wanna upload. How do we do this?
-
-##### Frontend Form
-
-For the avatar we can set an input to select a single file.
-For the family photos we set an input field for selecting multiple files.
-
-```
-<input type="file" name="avatar" accept="image/*" />
-<input type="file" name="family" accept="image/*" multiple />
-```
-
-##### Backend
-
-Will follow...
+At the time of writing the author does not know of any batch uploading of an base64 array. But if you find something let me know :)
 
 
 ## Resources
