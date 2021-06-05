@@ -158,7 +158,7 @@ Here we assume, you manage the files in an array in state, e.g. `const [recipeIm
 
 If you put an onChange handler on your "multiple input" field, you will have now all files availabe in the event: `e.target.files`
 
-Now you need to loop over that list of files - using the FileReader class (see above) - and convert each file to a base64 string.
+Now you need to loop over that list of files and convert each file to a base64 string using the FileReader class (see code above).
 
 Alternative: You do this conversion on submit of the whole form to make it a bit more efficient.
 
