@@ -26,6 +26,9 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 
 * Load the .env at the top of your server.js file (if not done already):  `require("dotenv").config() `
 
+* Adapt the JSON upload limit in your JSON body parser middleware. The default upload limit is 100KB!
+  * So in order to allow e.g. uploads of 1MB of data, state: `app.use( express.json({ limit: '1MB' })`
+
 * Adapt your model where you wanna store an image URL
   * Example User Model: add a field "avatar_url" (String)
 
