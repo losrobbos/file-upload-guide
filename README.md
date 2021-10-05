@@ -23,6 +23,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 * Configure Cloudinary URL in a .env of your backend
   * The Cloudinary URL is similar to your MongoDB Atlas URL. A url to your own cloud including your user credentials
   * You find the Cloudinary Environment URL in the cloudinary dashboard after login
+   * Just pick the variable "CLOUDINARY_URL" from the dashboard and place it in your .env
 
 * Load the .env at the top of your server.js file (if not done already):  `require("dotenv").config() `
 
@@ -38,7 +39,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
   * Upload the avatar string to cloudinary
     * `const result = await cloudinary.upload.upload( avatar )`
   * Store the received URL in your model
-    * e.g. `const userNew = await User({ ...userData, avatar_url: result.secure_url }) `
+    * e.g. `const userNew = await User.create({ ...userData, avatar_url: result.secure_url }) `
     * Cloudinary will provide you with TWO urls in its response: url and secure_url
      * url will be reachable by http:// and secure_url will be reachable by https://. So it is advisable to always use the secure one 
   * Return the created user to the frontend using res.json()
