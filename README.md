@@ -139,7 +139,7 @@ So the process would then look like this in your signup route:
 - Create user in DB first and send response
 - AFTER your res.json() you perform the upload of the base64 image to cloudinary!
 - If the upload succeeded: Replace the base64 Avatar of the user with the cloudinary URL!
-- ` User.findByIdAndUpdate( newUser._Id, { avatar_url: uploadResult.secure_url } ) ` 
+- ` User.findByIdAndUpdate( newUser._id, { avatar_url: uploadResult.secure_url } ) ` 
 - Do NOT send a response afterwards (you can just send ONE response to the user in a route)
 
 This measure should reduce the response time significantly. 
