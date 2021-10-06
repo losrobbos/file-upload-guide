@@ -122,7 +122,33 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
       }
     ```
 
-### Uploading two different file fields
+## Performance
+
+Waiting for the cloudinary response can take time. Especially when you deploy your page.
+
+To increase the response to the frontend you can do the following:
+
+Send a response early! Create the user in the database first and store the base64 encoded string in the database! 
+
+You can use the same field in the DB schema. An encoded file is a valid "uri", that's why you can put it in the "src" prop of the `<img>` easily.
+
+Once you have stored the user -> send the response back immediately. And upload the avatar AFTERWARDS! 
+
+So the process would then look like this in your signup route:
+
+- Create user in DB first and send response
+- AFTER your res.json() you perform the upload of the base64 image to cloudinary!
+- If the upload succeeded: Replace the base64 Avatar of the user with the cloudinary URL!
+- ` User.findByIdAndUpdate( newUser._Id, { avatar_url: uploadResult.secure_url } ) ` 
+- Do NOT send a response afterwards (you can just send ONE response to the user in a route)
+
+This measure should reduce the response time significantly. 
+
+Only risk: If the cloudinary upload fails, you are stuck with your base64 encoded string in the database. But that should be fine for now. We just want to prevent storing ALL our images base64 encoded in the database, because then the storage limit can get exceeded fast. A few base64 stored images should be fine. 
+
+For the nerds only: We could write a /reupload-avatars route which we call every now and then. That route will check all users in the database who still have a base64 encoded avatar and try to re-upload that one to cloudinary. This way we can clean and "compact" our DB entries regularly.
+
+## Uploading two different file fields
 
 Let's assume you wanna manage your user avatar + your family photo in your profile.
 
