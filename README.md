@@ -124,13 +124,15 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 
 ## Performance
 
-Waiting for the cloudinary response can take time. Especially when you deploy your page to th web. Then your frontend goes to your API, your API reaches out to ATLAS and afterwards to Cloudinary. So a huge caravan of data is going through the web :)
+Waiting for the cloudinary response can take time. 
+
+Especially when you deploy your page to the web. Then your frontend sends all signup data over the net to your API, your API reaches out to ATLAS and afterwards to Cloudinary. So a huge caravan of data is going through the web :) Until all that finishes, time can accumulate to several seconds!
 
 To increase the response to the frontend significantly you can do the following:
 
 Send a response in your API as fast as possible! 
 
-How? Create the user in the database first and store temporarily the base64 encoded string as avatar_uri.
+How? Create the user in the database FIRST and store the base64 encoded string temporarily as your avatar_url.
 
 You can use the same field in the DB schema. An encoded file is a valid "uri", that's why you can put it in the "src" attribute of the `<img>` tag easily.
 
