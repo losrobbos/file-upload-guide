@@ -142,11 +142,11 @@ So the process would then look like this in your signup route:
 - ` User.findByIdAndUpdate( newUser._id, { avatar_url: uploadResult.secure_url } ) ` 
 - Do NOT send a response afterwards (you can just send ONE response to the user in a route)
 
-This measure should reduce the response time significantly. 
+This measure should reduce the response time on signup significantly. And you still get an image for your user back in the response which you can use in an `<img src="" />` tag!
 
-Only risk: If the cloudinary upload fails, you are stuck with your base64 encoded string in the database. But that should be fine for now. We just want to prevent storing ALL our images base64 encoded in the database, because then the storage limit can get exceeded fast. A few base64 stored images should be fine. 
+Only risk: If the cloudinary upload fails, you are stuck with your base64 encoded string in the database. But that should be fine for just few entries. We just want to prevent storing ALL our images base64 encoded in the database, due the storage limit could get exceeded fast. A few base64 stored images should be fine. 
 
-For the nerds only: We could write a /reupload-avatars route which we call every now and then. That route will check all users in the database who still have a base64 encoded avatar and try to re-upload that one to cloudinary. This way we can clean and "compact" our DB entries regularly.
+For the nerds: We could write a /reupload-avatars route which we call every now and then. That route will check all users in the database who still have a base64 encoded avatar and try to re-upload that one to cloudinary and replace then the base64 thing with the URL in our DB. This way we can clean and "compact" our DB entries regularly.
 
 ## Uploading two different file fields
 
