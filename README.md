@@ -133,7 +133,7 @@ Especially when you deploy your page to the web. Then your frontend sends all si
 
 To increase the response to the frontend significantly you can do the following:
 
-Send a response in your API as fast as possible! 
+Send a response from your API to the frontend as fast as possible! 
 
 How? Create the user in the database FIRST and store the base64 encoded string temporarily as your avatar_url.
 
