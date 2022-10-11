@@ -44,7 +44,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
      * url will be reachable by http:// and secure_url will be reachable by https://. So it is advisable to always use the secure one 
   * Return the created user to the frontend using res.json()
 
-* Test File upload against your route from your favorite REST client
+* Test File upload against your route with your favorite REST client
   * Setup a POST request to your API upload URL & use JSON as Body format
   * Convert some avatar file to a base64 dataUri, e.g. here: https://www.base64-image.de/
   * Paste the dataUri into your JSON Body
