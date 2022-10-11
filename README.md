@@ -129,7 +129,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 
 Waiting for the cloudinary response can take time. 
 
-Especially when you deploy your page to the web. Then your frontend sends all signup data over the net to your API, your API reaches out to ATLAS and afterwards to Cloudinary. So a huge caravan of data is going through the web :) Until all that finishes, time can accumulate to several seconds!
+Especially when you deploy your page to the web. Then your frontend sends all signup data over the net to your API, your API reaches out to MongoDB ATLAS and afterwards to Cloudinary. So a huge caravan of data is going through the web :) Until all that finishes, time can accumulate to several seconds!
 
 To increase the response to the frontend significantly you can do the following:
 
