@@ -71,7 +71,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
   * Define an onAvatarChange handler `const onAvatarChange = (e) => {...}`
   * The file, the user selected, will be availble in the event object: `e.target.files[0]`
   * If you allowed multiple file selection (with `<input type="file" multiple />`) you will have an array of files in `e.target.files`
-  * e.target.files contains the binary files. These we now need to convert to DataURI Strings using the Browser builtin `FileReader` class
+  * e.target.files contains pointers to the binary files. These we now need to convert to DataURI Strings using the Browser builtin `FileReader` class
   * Example: 
     ```
     let fileSelected = e.target.files[0]  // grab selected file
