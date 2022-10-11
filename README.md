@@ -8,7 +8,7 @@ We will use the example of an Avatar upload.
 
 In this fullstack sample we will encode our images as base64 strings BEFORE uploading them to the API. So we will do the conversion in the frontend.
 
-This way we do not need to send "multipart formdata" and just upload a JSON object as usual, which simplifies the workflow in the frontend a lot.
+This way we do not need to send "multipart formdata" and just upload a JSON object as usual, which simplifies the overall workflow quite a bit.
 
 Also in the backend we then do not need to parse binary data anymore. We can simply upload directly the received base64 string to our file cloud provider.
 
