@@ -113,8 +113,10 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
         // signup user with avatar in backend
         try {
           let response = await axios.post('http://localhost:5000/users', jsonData)
-          console.log("Response: ", response.data) // => signed up user
-          history.push('/users')  
+          // do something with the user, e.g. store in React Context....
+          
+          // forward to user profile
+          history.push('/profile')  
         }
         // handle error
         catch(errAxios) {
