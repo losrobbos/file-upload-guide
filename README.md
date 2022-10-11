@@ -102,8 +102,8 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
   * So the simplest way to avoid this, is by not handling the file input by React-Hook-Form (not putting a register key on it)
 
 * Submitting
-  * Before sending the data to Axios, we need to merge the encoded avatar file into the form JSON data
-  * Afterwards we can forward all data with Axios to the API
+  * Before sending the data to the API, we need to merge the encoded avatar file into the form JSON data
+  * Afterwards we can forward all data, e.g. with Axios, to the API
   * Full submit Example:
     ```
       onSubmit = (jsonData) => {
