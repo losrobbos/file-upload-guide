@@ -47,8 +47,8 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 * Test File upload against your route with your favorite REST client
   * Setup a POST request to your API upload URL
   * Use JSON as Body format
-  * Convert some avatar file to a base64 dataUri, e.g. here: https://www.base64-image.de/
-  * Paste the dataUri into your JSON Body
+  * Convert some avatar file to a base64 dataUri string, e.g. here: https://www.base64-image.de/ and copy the generated string into the clipboard
+  * Paste the dataUri string into your JSON Body "avatar" field
   * Example body:
   ```
   {
