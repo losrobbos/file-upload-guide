@@ -45,7 +45,8 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
   * Return the created user to the frontend using res.json()
 
 * Test File upload against your route with your favorite REST client
-  * Setup a POST request to your API upload URL & use JSON as Body format
+  * Setup a POST request to your API upload URL
+  * Use JSON as Body format
   * Convert some avatar file to a base64 dataUri, e.g. here: https://www.base64-image.de/
   * Paste the dataUri into your JSON Body
   * Example body:
