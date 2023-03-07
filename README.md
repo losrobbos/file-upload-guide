@@ -8,11 +8,15 @@ To see an minimal fullstack code example of this guide, see this demo: https://g
 
 We will use the example of an Avatar upload.
 
-In this fullstack sample we will encode our images as base64 strings BEFORE uploading them to the API. So we will do the conversion in the frontend.
+In this fullstack sample we will encode our images as base64 strings BEFORE uploading them to the API. So we will do the conversion from BINARY to STRING in the frontend.
 
-This way we do not need to send "multipart formdata" and just upload a JSON object as usual, which simplifies the overall workflow quite a bit.
+This way we do not need to send "multipart formdata", do not need to use the "FormData" class to send data and just upload all our form data, including the image, as a JSON object as usual, which simplifies the overall workflow quite a bit.
 
-Also in the backend we then do not need to parse binary data anymore. We can simply upload directly the received base64 string to our file cloud provider. This way we can completely skip classical file parsing middleware like Multer.
+Also in the backend we then do not need to parse binary data anymore. 
+
+We can simply upload directly the received base64 string to our file cloud provider. We just forward it, without any processing.
+
+This way we can completely skip classical file parsing middleware like Multer.
 
 ## Steps 
 
@@ -23,7 +27,7 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 
 * Install following packages: `npm i cloudinary dotenv` 
 * Configure Cloudinary URL in a .env of your backend
-  * The Cloudinary URL is similar to your MongoDB Atlas URL. A url to your own cloud including your user credentials
+  * The Cloudinary URL is similar to your MongoDB Atlas URL. An url to your own cloud including your user credentials
   * You find the Cloudinary Environment URL in the cloudinary dashboard after login
    * Just pick the variable "CLOUDINARY_URL" from the dashboard and place it in your .env
 
