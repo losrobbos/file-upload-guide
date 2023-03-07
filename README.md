@@ -4,7 +4,7 @@ Find here summarized a mini guide how to incorporate file uplading from frontend
 
 We will use Cloudinary as the provider, which allows us (at the time of writing) 10GB+ storage for free.
 
-To see an minimal fullstack code example of this guide, see this demo: https://github.com/losrobbos/file-string-upload-fullstack
+To see a minimal fullstack code example of this guide, see this demo: https://github.com/losrobbos/file-string-upload-fullstack
 
 We will use the example of an Avatar upload.
 
