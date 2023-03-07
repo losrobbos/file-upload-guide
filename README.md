@@ -40,14 +40,16 @@ This way we can completely skip classical file parsing middleware like Multer.
   * Example User Model: add a field "avatar_url" (String)
 
 * Upload route handler (=controller)
-  * Import cloudinary at the top of your file: `const cloudinary = require("cloudinary").v2`   
+  * Import cloudinary at the top of your file: 
+   * `const cloudinary = require("cloudinary").v2` or
+   * `import { v2 as cloudinary } from 'cloudinary'` (in case you use import / export es6 syntax in your backend)    
   * Extract / split the avatar file and normal JSON data from req.body: `const { avatar, ...userData } = req.body `
   * Upload the avatar string to cloudinary
-    * `const result = await cloudinary.upload.upload( avatar )`
+   * `const result = await cloudinary.upload.upload( avatar )`
   * Store the received URL in your model
-    * e.g. `const userNew = await User.create({ ...userData, avatar_url: result.secure_url }) `
-    * Cloudinary will provide you with TWO urls in its response: url and secure_url
-     * url will be reachable by http:// and secure_url will be reachable by https://. So it is advisable to always use the secure one 
+   * e.g. `const userNew = await User.create({ ...userData, avatar_url: result.secure_url }) `
+   * Cloudinary will provide you with TWO urls in its response: url and secure_url
+    * url will be reachable by http:// and secure_url will be reachable by https://. So it is advisable to always use the secure one 
   * Return the created user to the frontend using res.json()
 
 * Test File upload against your route with your favorite REST client
