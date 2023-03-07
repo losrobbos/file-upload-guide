@@ -71,20 +71,23 @@ Also in the backend we then do not need to parse binary data anymore. We can sim
 * Handle the avatar selection
   * Setup a state for storing the avatar file: `const [avatarPreview, setAvatarPreview] =  useState()`
   * Define an onAvatarChange handler `const onAvatarChange = (e) => {...}`
+  * Place the handler on the input type file: `<input type="file" onChange={ onAvatarChange } />`
   * The file, the user selected, will be availble in the event object: `e.target.files[0]`
   * If you allowed multiple file selection (with `<input type="file" multiple />`) you will have an array of files in `e.target.files`
   * e.target.files contains pointers to the binary files. These we now need to convert to DataURI Strings using the Browser builtin `FileReader` class
   * Example: 
     ```
-    let fileSelected = e.target.files[0]  // grab selected file
+    const onAvatarChange = (e) => {
+      let fileSelected = e.target.files[0]  // grab selected file
 
-    if(!fileSelected) return
+      if(!fileSelected) return
 
-    let fileReader = new FileReader()
-    fileReader.readAsDataURL( fileSelected ) // concert to base64 encoded string
-    // wait until file is fully loaded / converted to base64 (once fully loaded the "onloadedend" event below fires)
-    fileReader.onloadend = (ev) => {
-      setAvatarPreview( fileReader.result )
+      let fileReader = new FileReader()
+      fileReader.readAsDataURL( fileSelected ) // concert to base64 encoded string
+      // wait until file is fully loaded / converted to base64 (once fully loaded the "onloadedend" event below fires)
+      fileReader.onloadend = (ev) => {
+        setAvatarPreview( fileReader.result )
+      }
     }
     ```
     
